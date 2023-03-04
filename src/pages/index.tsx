@@ -9,12 +9,14 @@ export default function Home() {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
       </Head>
       <main
-      // style={{
-      //   display: "flex",
-      //   flexDirection: "column",
-      //   alignItems: "center",
-      // }}
-      >
+      style={{
+        display: "flex",
+        flexDirection: "column",
+        alignItems: "center",
+        textAlign:"center",
+        fontSize: "3em"
+      }}
+      >What is PillPall?
         {/* <div style={{ width: "80vw", height: "30em", background: "red" }}></div> */}
       </main>
     </>

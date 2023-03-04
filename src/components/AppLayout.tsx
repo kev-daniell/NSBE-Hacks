@@ -117,7 +117,7 @@ export default function AppLayout({ window }: Props) {
               textDecoration: "none",
             }}
           >
-            Pornhub
+            PillPall
           </Typography>
 
           <Box sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}>
