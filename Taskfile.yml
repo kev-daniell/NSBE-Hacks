@@ -1,0 +1,21 @@
+# https://taskfile.dev
+
+version: "3"
+
+vars:
+  GREETING: Hello, World!
+
+tasks:
+  backend:
+    dir: backend
+    cmds:
+      - go run main.go
+  frontend:
+    cmds:
+      - yarn dev
+  default:
+    deps:
+      - task: frontend
+      - task: backend
+
+    silent: true
