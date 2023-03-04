@@ -4,6 +4,7 @@ import (
 	"encoding/json"
 	"fmt"
 	"github.com/gorilla/mux"
+	"github.com/pill-pal/backend/caretaker"
 	"github.com/pill-pal/backend/patient"
 	"github.com/pill-pal/backend/types"
 	"gorm.io/driver/postgres"
@@ -54,6 +55,7 @@ func main() {
 	router := mux.NewRouter()
 
 	patientHandler := patient.NewPatient(db)
+	caretakerHandler := caretaker.NewCaretaker(db)
 
 	router.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
 		err := json.NewEncoder(w).Encode("Hi Mom")
@@ -62,12 +64,17 @@ func main() {
 		}
 	})
 
-	// users:
-	router.HandleFunc("/users", patientHandler.MakePatient).Methods(http.MethodPost)
-	router.HandleFunc("/users", patientHandler.GetAllPatients).Methods(http.MethodGet)
-	router.HandleFunc("/users/{id}", patientHandler.GetPatient).Methods(http.MethodGet)
-	router.HandleFunc("/users/{id}", patientHandler.UpdatePatient).Methods(http.MethodPatch)
-	router.HandleFunc("/users/{id}", patientHandler.DeletePatient).Methods(http.MethodDelete)
+	// patients:
+	router.HandleFunc("/patient", patientHandler.MakePatient).Methods(http.MethodPost)
+	router.HandleFunc("/patient", patientHandler.GetAllPatients).Methods(http.MethodGet)
+	router.HandleFunc("/patient/{id}", patientHandler.GetPatient).Methods(http.MethodGet)
+	router.HandleFunc("/patient/{id}", patientHandler.UpdatePatient).Methods(http.MethodPatch)
+	router.HandleFunc("/patient/{id}", patientHandler.DeletePatient).Methods(http.MethodDelete)
+
+	// caretaker:
+	router.HandleFunc("/caretaker", caretakerHandler.MakeCaretaker).Methods(http.MethodPost)
+
+	// schedules:
 
 	err = http.ListenAndServe(":8080", router)
 	if err != nil {
