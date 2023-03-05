@@ -1,7 +1,10 @@
-import { useState, useEffect } from "react";
-import { Calendar, CalendarDay, Dosage, PatientType } from "../../types/types";
-import { Calendar as AntdCalendar } from "antd";
-import moment from "moment";
+import { useState, useEffect } from 'react';
+import { Calendar, CalendarDay, Dosage } from '../../types/types';
+import { PatientType } from '../../types/types';
+import { Calendar as AntdCalendar } from 'antd';
+import moment from 'moment';
+
+
 
 interface Props {}
 
@@ -12,12 +15,12 @@ const CalendarPage: React.FC<Props> = () => {
 
   // Initialize the calendar
   const initCalendar = (): void => {
-    const weeks: Calendar["weeks"] = [];
-
+    const weeks: Calendar['weeks'] = [];
+  
     // For the sake of this example, let's create a calendar with four weeks
     for (let weekIndex = 0; weekIndex < 4; weekIndex++) {
       const days: CalendarDay[] = [];
-
+  
       // Each week has seven days
       for (let dayIndex = 0; dayIndex < 7; dayIndex++) {
         const day: CalendarDay = {
@@ -25,28 +28,51 @@ const CalendarPage: React.FC<Props> = () => {
           month: weekIndex + 1,
           year: new Date().getFullYear(),
           dosages: [],
+          startDate: moment().add(weekIndex, 'week').add(dayIndex, 'day').startOf('day').toDate(),
+          endDate: moment().add(weekIndex, 'week').add(dayIndex, 'day').endOf('day').toDate(),
         };
-
-        // For each day, let's add three dosages for demonstration purposes
-        for (let dosageIndex = 0; dosageIndex < 3; dosageIndex++) {
-          const dosage: Dosage = {
-            medicine: `Medicine ${dosageIndex + 1}`,
-            dosage: `${dosageIndex + 1} mg`,
-            time: `${dosageIndex + 1}:00 PM`,
-            medicineType: "Type A",
-          };
-
-          day.dosages.push(dosage);
-        }
-
+      
+        // Add some sample dosages for each day
+        const morningDosage: Dosage = {
+          medicine: 'Medicine 1',
+          dosage: '1 mg',
+          time: '9:00 AM',
+          medicineType: 'Type A',
+          startDateTime: moment(day.startDate).add(8, 'hour').toDate(), 
+          endDateTime: moment(day.startDate).add(9, 'hour').toDate(),
+        };
+      
+        const afternoonDosage: Dosage = {
+          medicine: 'Medicine 2',
+          dosage: '2 mg',
+          time: '2:00 PM',
+          medicineType: 'Type B',
+          startDateTime: moment(day.startDate).add(12, 'hour').toDate(),
+          endDateTime: moment(day.startDate).add(14, 'hour').toDate(),
+        };
+      
+        const eveningDosage: Dosage = {
+          medicine: 'Medicine 3',
+          dosage: '3 mg',
+          time: '7:00 PM',
+          medicineType: 'Type C',
+          startDateTime: moment(day.startDate).add(18, 'hour').toDate(),
+          endDateTime: moment(day.startDate).add(21, 'hour').toDate(),
+        };
+      
+        day.dosages.push(morningDosage);
+        day.dosages.push(afternoonDosage);
+        day.dosages.push(eveningDosage);
+      
         days.push(day);
+        
       }
-
+  
       weeks.push({
         days,
       });
     }
-
+  
     setCalendar({
       weeks,
     });
@@ -58,36 +84,35 @@ const CalendarPage: React.FC<Props> = () => {
   }, []);
 
   return (
-    <div style={{ padding: "20px" }}>
-      <h1 style={{ textAlign: "center" }}>Calendar Page</h1>
+    <div style={{ padding: '20px' }}>
+      <h1 style={{ textAlign: 'center' }}>Calendar Page</h1>
       <AntdCalendar
         dateCellRender={(date) => {
-          const day = calendar.weeks.find((week) =>
-            week.days.some((day) =>
-              moment(new Date()).isSame(
-                `${day.year}-${day.month}-${day.day}`,
-                "day"
+            const day = calendar.weeks.find((week) =>
+              week.days.some((day) =>
+                moment(date.toDate()).isBetween(day.startDate, day.endDate, null, '[]')
               )
-            )
-          );
-          return (
-            <ul>
-              {day?.days
-                .find((day) =>
-                  moment(new Date()).isSame(
-                    `${day.year}-${day.month}-${day.day}`,
-                    "day"
-                  )
-                )
-                ?.dosages.map((dosage) => (
-                  <li key={dosage.medicine}>
-                    {dosage.medicine}: {dosage.dosage}, {dosage.time},{" "}
+            );
+          
+            // Find the dosage that matches the start and end dates for the current day
+            const dosage =
+              day?.days.find((day) =>
+                moment(date.toDate()).isBetween(day.startDate, day.endDate, null, '[]')
+              )?.dosages[0];
+          
+            return (
+              <ul>
+                {dosage && (
+                  <li>
+                    {dosage.medicine}: {dosage.dosage}, {dosage.time},{' '}
                     {dosage.medicineType}
                   </li>
-                ))}
-            </ul>
-          );
-        }}
+                )}
+              </ul>
+            );
+          }}
+          
+          
       />
     </div>
   );
