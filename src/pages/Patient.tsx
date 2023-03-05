@@ -5,7 +5,7 @@ const Patient = () => {
   const [newPatientName, setNewPatientName] = useState("");
   const [newPatientDosages, setNewPatientDosages] = useState("");
   const [newPatientMedicineType, setNewPatientMedicineType] = useState("");
-  const [patients, setPatients] = useState<>([]);
+  const [patients, setPatients] = useState<PatientType[]>([]);
 
   const handleNewPatientSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
