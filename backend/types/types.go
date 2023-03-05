@@ -7,7 +7,7 @@ import (
 
 type Patient struct {
 	gorm.Model  // includes id (uint), createdAt, updatedAt (time), and DeletedAt
-	CaretakerId int
+	CaretakerId string
 	Name        string
 	PhoneNumber string
 }

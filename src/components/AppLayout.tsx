@@ -185,11 +185,11 @@ export default function AppLayout({ window }: Props) {
           <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
             {user && (
               <Button
-                href="/create"
+                href="/patients"
                 onClick={handleDrawerToggle}
                 sx={{ my: 2, color: "white", display: "block" }}
               >
-                Create
+                Patients
               </Button>
             )}
           </Box>

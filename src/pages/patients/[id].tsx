@@ -1,8 +1,7 @@
-import { useState, useEffect } from 'react';
-import { Calendar, CalendarDay, Dosage } from '../types/types';
-import { PatientType } from '../types/types';
-import { Calendar as AntdCalendar } from 'antd';
-import moment from 'moment';
+import { useState, useEffect } from "react";
+import { Calendar, CalendarDay, Dosage, PatientType } from "../../types/types";
+import { Calendar as AntdCalendar } from "antd";
+import moment from "moment";
 
 interface Props {}
 
@@ -13,7 +12,7 @@ const CalendarPage: React.FC<Props> = () => {
 
   // Initialize the calendar
   const initCalendar = (): void => {
-    const weeks: Calendar['weeks'] = [];
+    const weeks: Calendar["weeks"] = [];
 
     // For the sake of this example, let's create a calendar with four weeks
     for (let weekIndex = 0; weekIndex < 4; weekIndex++) {
@@ -34,7 +33,7 @@ const CalendarPage: React.FC<Props> = () => {
             medicine: `Medicine ${dosageIndex + 1}`,
             dosage: `${dosageIndex + 1} mg`,
             time: `${dosageIndex + 1}:00 PM`,
-            medicineType: 'Type A',
+            medicineType: "Type A",
           };
 
           day.dosages.push(dosage);
@@ -59,18 +58,31 @@ const CalendarPage: React.FC<Props> = () => {
   }, []);
 
   return (
-    <div style={{ padding: '20px' }}>
-      <h1 style={{ textAlign: 'center' }}>Calendar Page</h1>
+    <div style={{ padding: "20px" }}>
+      <h1 style={{ textAlign: "center" }}>Calendar Page</h1>
       <AntdCalendar
         dateCellRender={(date) => {
-          const day = calendar.weeks.find((week) => week.days.some((day) => moment(new Date()).isSame(`${day.year}-${day.month}-${day.day}`, 'day')));
+          const day = calendar.weeks.find((week) =>
+            week.days.some((day) =>
+              moment(new Date()).isSame(
+                `${day.year}-${day.month}-${day.day}`,
+                "day"
+              )
+            )
+          );
           return (
             <ul>
               {day?.days
-                .find((day) => moment(new Date()).isSame(`${day.year}-${day.month}-${day.day}`, 'day'))
+                .find((day) =>
+                  moment(new Date()).isSame(
+                    `${day.year}-${day.month}-${day.day}`,
+                    "day"
+                  )
+                )
                 ?.dosages.map((dosage) => (
                   <li key={dosage.medicine}>
-                    {dosage.medicine}: {dosage.dosage}, {dosage.time}, {dosage.medicineType}
+                    {dosage.medicine}: {dosage.dosage}, {dosage.time},{" "}
+                    {dosage.medicineType}
                   </li>
                 ))}
             </ul>
@@ -82,5 +94,3 @@ const CalendarPage: React.FC<Props> = () => {
 };
 
 export default CalendarPage;
-
-
