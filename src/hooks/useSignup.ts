@@ -33,7 +33,7 @@ export default function useSignup() {
       // add display name to usser
       await updateProfile(res.user, { displayName });
       await axios.post(
-        `http://${process.env.NEXT_PUBLIC_BACKEND_URL}/caretaker`,
+        `https://${process.env.NEXT_PUBLIC_BACKEND_URL}/caretaker`,
         {
           name: displayName,
           phoneNumber: phoneNum,
