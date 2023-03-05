@@ -95,8 +95,8 @@ export default function AppLayout({ window }: Props) {
             </>
           )}
           {user && (
-            <ListItemButton sx={{ textAlign: "center" }} href="/create">
-              <ListItemText primary={"Create"} />
+            <ListItemButton sx={{ textAlign: "center" }} href="/patients">
+              <ListItemText primary={"Patients"} />
             </ListItemButton>
           )}
         </ListItem>
