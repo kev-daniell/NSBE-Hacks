@@ -1,4 +1,10 @@
-import { Container, Typography, TextField, Button } from "@mui/material";
+import {
+  Container,
+  Typography,
+  TextField,
+  Button,
+  CircularProgress,
+} from "@mui/material";
 import { useForm } from "react-hook-form";
 import { useState } from "react";
 import * as React from "react";
@@ -58,15 +64,32 @@ function LoginForm() {
           required
           onChange={onChange}
         />
-        <Button
-          type="submit"
-          fullWidth
-          variant="contained"
-          color="primary"
-          style={{ marginTop: "4px" }}
-        >
-          Login
-        </Button>
+        {!pending && (
+          <Button
+            type="submit"
+            fullWidth
+            variant="contained"
+            color="primary"
+            style={{ marginTop: "4px" }}
+          >
+            Login
+          </Button>
+        )}
+        {pending && (
+          <Button
+            fullWidth
+            variant="contained"
+            color="primary"
+            style={{ marginTop: "4px" }}
+            disabled
+          >
+            <CircularProgress
+              size={20}
+              sx={{ color: "white", marginRight: 2 }}
+            />
+            Signup
+          </Button>
+        )}
       </form>
     </Container>
   );
