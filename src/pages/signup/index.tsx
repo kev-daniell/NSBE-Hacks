@@ -36,94 +36,94 @@ function SignUpForm() {
     });
   }
   return (
-    <Container maxWidth="xs">
-      <Typography
-        style={{
-          textAlign: "center",
-          margin: "1 0 4",
-        }}
-        variant="h3"
-      >
-        SignUp
-      </Typography>
-      <form onSubmit={onSubmit} noValidate>
-        <TextField
-          name="name"
-          variant="outlined"
-          margin="normal"
-          label="Name"
-          fullWidth
-          required
-          onChange={onChange}
-        />
-
-        <TextField
-          name="email"
-          variant="outlined"
-          margin="normal"
-          label="Email"
-          fullWidth
-          required
-          onChange={onChange}
-        />
-        <TextField
-          name="phoneNumber"
-          variant="outlined"
-          margin="normal"
-          label="Phone"
-          fullWidth
-          type="tel"
-          required
-          onChange={onChange}
-        />
-        <TextField
-          name="password"
-          variant="outlined"
-          margin="normal"
-          label="Password"
-          type="password"
-          fullWidth
-          required
-          onChange={onChange}
-        />
-
-        {!pending && (
-          <Button
-            type="submit"
+    <div
+      style={{
+        minHeight: "90vh",
+        height: "auto",
+        display: "flex",
+        alignItems: "center",
+      }}
+    >
+      <Container maxWidth="xs">
+        <Typography
+          style={{
+            textAlign: "center",
+            margin: "1 0 4",
+          }}
+          variant="h3"
+        >
+          SignUp
+        </Typography>
+        <form onSubmit={onSubmit} noValidate>
+          <TextField
+            name="name"
+            variant="outlined"
+            margin="normal"
+            label="Name"
             fullWidth
-            variant="contained"
-            color="primary"
-            style={{ marginTop: "4px" }}
-          >
-            SignUp
-          </Button>
-        )}
-        {pending && (
-          <Button
+            required
+            onChange={onChange}
+          />
+
+          <TextField
+            name="email"
+            variant="outlined"
+            margin="normal"
+            label="Email"
             fullWidth
-            variant="contained"
-            color="primary"
-            style={{ marginTop: "4px" }}
-            disabled
-          >
-            <CircularProgress
-              size={20}
-              sx={{ color: "white", marginRight: 2 }}
-            />
-            Signup
-          </Button>
-        )}
-        {/* {json && (
-          <>
-            <Typography variant="body1">
-              Below is the JSON that would normally get passed to the server
-              when a form gets submitted
-            </Typography>
-            <Typography variant="body2">{json}</Typography>
-          </>
-        )} */}
-      </form>
-    </Container>
+            required
+            onChange={onChange}
+          />
+          <TextField
+            name="phoneNumber"
+            variant="outlined"
+            margin="normal"
+            label="Phone"
+            fullWidth
+            type="tel"
+            required
+            onChange={onChange}
+          />
+          <TextField
+            name="password"
+            variant="outlined"
+            margin="normal"
+            label="Password"
+            type="password"
+            fullWidth
+            required
+            onChange={onChange}
+          />
+
+          {!pending && (
+            <Button
+              type="submit"
+              fullWidth
+              variant="contained"
+              color="primary"
+              style={{ marginTop: "4px" }}
+            >
+              SignUp
+            </Button>
+          )}
+          {pending && (
+            <Button
+              fullWidth
+              variant="contained"
+              color="primary"
+              style={{ marginTop: "4px" }}
+              disabled
+            >
+              <CircularProgress
+                size={20}
+                sx={{ color: "white", marginRight: 2 }}
+              />
+              Signup
+            </Button>
+          )}
+        </form>
+      </Container>
+    </div>
   );
 }
 

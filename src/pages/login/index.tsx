@@ -33,65 +33,74 @@ function LoginForm() {
     });
   }
   return (
-    <Container maxWidth="xs">
-      <Typography
-        style={{
-          textAlign: "center",
-          margin: "1 0 4",
-        }}
-        variant="h3"
-      >
-        Login
-      </Typography>
-      <form onSubmit={onSubmit} noValidate>
-        <TextField
-          name="email"
-          variant="outlined"
-          margin="normal"
-          label="Email"
-          fullWidth
-          required
-          onChange={onChange}
-        />
+    <div
+      style={{
+        minHeight: "90vh",
+        height: "auto",
+        display: "flex",
+        alignItems: "center",
+      }}
+    >
+      <Container maxWidth="xs">
+        <Typography
+          style={{
+            textAlign: "center",
+            margin: "1 0 4",
+          }}
+          variant="h3"
+        >
+          Login
+        </Typography>
+        <form onSubmit={onSubmit} noValidate>
+          <TextField
+            name="email"
+            variant="outlined"
+            margin="normal"
+            label="Email"
+            fullWidth
+            required
+            onChange={onChange}
+          />
 
-        <TextField
-          name="password"
-          variant="outlined"
-          margin="normal"
-          label="Password"
-          type="password"
-          fullWidth
-          required
-          onChange={onChange}
-        />
-        {!pending && (
-          <Button
-            type="submit"
+          <TextField
+            name="password"
+            variant="outlined"
+            margin="normal"
+            label="Password"
+            type="password"
             fullWidth
-            variant="contained"
-            color="primary"
-            style={{ marginTop: "4px" }}
-          >
-            Login
-          </Button>
-        )}
-        {pending && (
-          <Button
-            fullWidth
-            variant="contained"
-            color="primary"
-            style={{ marginTop: "4px" }}
-            disabled
-          >
-            <CircularProgress
-              size={20}
-              sx={{ color: "white", marginRight: 2 }}
-            />
-            Signup
-          </Button>
-        )}
-      </form>
-    </Container>
+            required
+            onChange={onChange}
+          />
+          {!pending && (
+            <Button
+              type="submit"
+              fullWidth
+              variant="contained"
+              color="primary"
+              style={{ marginTop: "4px" }}
+            >
+              Login
+            </Button>
+          )}
+          {pending && (
+            <Button
+              fullWidth
+              variant="contained"
+              color="primary"
+              style={{ marginTop: "4px" }}
+              disabled
+            >
+              <CircularProgress
+                size={20}
+                sx={{ color: "white", marginRight: 2 }}
+              />
+              Signup
+            </Button>
+          )}
+        </form>
+      </Container>
+    </div>
   );
 }
 
