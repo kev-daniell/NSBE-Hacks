@@ -61,7 +61,7 @@ func main() {
 	scheduleHandler := schedule.NewSchedule(db)
 
 	router.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
-		err := json.NewEncoder(w).Encode("Hi Mom")
+		err := json.NewEncoder(w).Encode("Test entry")
 		if err != nil {
 			return
 		}
