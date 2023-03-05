@@ -24,7 +24,7 @@ function PatientCardRow({ patients, rowSize }: Props) {
     <Row justify="center">
       {patients.map((p) => (
         <Col
-          key={p.id}
+          key={p.ID}
           span={4}
           //   xs={{ span: 1, offset: 1 }}
           //   sm={{ span: 1, offset: 1 }}

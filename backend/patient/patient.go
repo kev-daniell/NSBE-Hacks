@@ -52,15 +52,10 @@ func (u *patient) GetAllPatients(w http.ResponseWriter, r *http.Request) {
 	var patients []types.Patient
 
 	vars := mux.Vars(r)
-	id, err := strconv.Atoi(vars["id"])
-	if err != nil {
-		log.Println("id is missing in GetUser")
-		log.Println(err)
-		w.WriteHeader(404)
-	}
+	id := vars["id"]
 
 	u.db.Where("caretaker_id = ?", id).Find(&patients)
-	err = json.NewEncoder(w).Encode(&patients)
+	err := json.NewEncoder(w).Encode(&patients)
 	if err != nil {
 		return
 	}

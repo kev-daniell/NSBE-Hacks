@@ -1,6 +1,6 @@
 export interface patient {
-  name: string;
-  phoneNumber: string;
-  caretakerId: string;
-  id: string;
+  Name: string;
+  PhoneNumber: string;
+  CaretakerId: string;
+  ID: number;
 }
