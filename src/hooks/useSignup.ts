@@ -1,11 +1,8 @@
 import { useContext, useState } from "react";
 import authClient from "@/firebase/firebase";
 import { AuthContext } from "./context";
-import {
-  createUserWithEmailAndPassword,
-  GoogleAuthProvider,
-  updateProfile,
-} from "firebase/auth";
+import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
+import axios from "axios";
 import { useRouter } from "next/router";
 
 export default function useSignup() {
@@ -17,7 +14,8 @@ export default function useSignup() {
   const signup = async (
     email: string,
     password: string,
-    displayName: string
+    displayName: string,
+    phoneNum: string
   ) => {
     setError(null);
     setPending(true);
@@ -34,9 +32,12 @@ export default function useSignup() {
 
       // add display name to usser
       await updateProfile(res.user, { displayName });
-
+      await axios.post("http://localhost:8080/caretaker", {
+        name: displayName,
+        phoneNumber: phoneNum,
+      });
       userContext?.setUser(res.user);
-      setPending(false);
+      await setPending(false);
       setError(null);
       router.push("/");
     } catch (e) {
