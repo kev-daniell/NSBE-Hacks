@@ -3,6 +3,10 @@ package main
 import (
 	"encoding/json"
 	"fmt"
+	"net/http"
+	"os"
+	"strconv"
+
 	"github.com/gorilla/mux"
 	"github.com/pill-pal/backend/caretaker"
 	"github.com/pill-pal/backend/patient"
@@ -10,9 +14,6 @@ import (
 	"github.com/pill-pal/backend/types"
 	"gorm.io/driver/postgres"
 	"gorm.io/gorm"
-	"net/http"
-	"os"
-	"strconv"
 )
 
 func main() {
@@ -20,7 +21,7 @@ func main() {
 		err error
 		db  *gorm.DB
 	)
-
+	port := os.Getenv("PORT")
 	host := os.Getenv("HOST")
 	dbPort, err := strconv.Atoi(os.Getenv("DBPORT"))
 	if err != nil {
@@ -84,7 +85,7 @@ func main() {
 	router.HandleFunc("/schedule/{id}", scheduleHandler.UpdateSchedule).Methods(http.MethodPatch)
 	router.HandleFunc("/schedule/{id}", scheduleHandler.DeleteSchedule).Methods(http.MethodDelete)
 
-	err = http.ListenAndServe(":8080", router)
+	err = http.ListenAndServe(fmt.Sprintf(":%s", port), router)
 	if err != nil {
 		return
 	}
