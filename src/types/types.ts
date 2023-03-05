@@ -3,6 +3,8 @@ export interface Dosage {
   dosage: string;
   time: string;
   medicineType: string;
+  startDateTime: Date;
+  endDateTime: Date;
 }
 
 export interface CalendarDay {
@@ -10,6 +12,8 @@ export interface CalendarDay {
   month: number;
   year: number;
   dosages: Dosage[];
+  startDate?: Date;
+  endDate?: Date;
 }
 
 export interface CalendarWeek {
