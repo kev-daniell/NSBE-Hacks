@@ -16,6 +16,7 @@ type Caretaker struct {
 	gorm.Model
 	Name        string
 	PhoneNumber string
+	FirebaseId  string
 }
 
 type Schedule struct {

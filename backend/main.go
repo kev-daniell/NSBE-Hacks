@@ -7,8 +7,8 @@ import (
 	"os"
 	"strconv"
 
-	"github.com/gorilla/mux"
 	"github.com/gorilla/handlers"
+	"github.com/gorilla/mux"
 	"github.com/pill-pal/backend/caretaker"
 	"github.com/pill-pal/backend/patient"
 	"github.com/pill-pal/backend/schedule"
@@ -88,10 +88,10 @@ func main() {
 	router.HandleFunc("/schedule/{id}", scheduleHandler.DeleteSchedule).Methods(http.MethodDelete)
 
 	err = http.ListenAndServe(fmt.Sprintf(":%s", port), handlers.CORS(
-        handlers.AllowedHeaders([]string{"X-Requested-With", "Content-Type", "Authorization"}),
-        handlers.AllowedMethods([]string{"GET", "POST", "PUT", "DELETE", "OPTIONS"}),
-        handlers.AllowedOrigins([]string{"*"}),
-    )(router))	
+		handlers.AllowedHeaders([]string{"X-Requested-With", "Content-Type", "Authorization"}),
+		handlers.AllowedMethods([]string{"GET", "POST", "PUT", "DELETE", "OPTIONS"}),
+		handlers.AllowedOrigins([]string{"*"}),
+	)(router))
 	if err != nil {
 		return
 	}

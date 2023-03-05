@@ -35,6 +35,7 @@ export default function useSignup() {
       await axios.post("http://localhost:8080/caretaker", {
         name: displayName,
         phoneNumber: phoneNum,
+        firebaseId: res.user.uid,
       });
       userContext?.setUser(res.user);
       await setPending(false);
@@ -45,6 +46,7 @@ export default function useSignup() {
       setError(err);
       setPending(false);
       console.log(err);
+      console.log(e);
     }
   };
 
