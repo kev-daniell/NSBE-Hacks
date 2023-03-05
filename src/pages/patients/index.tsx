@@ -9,7 +9,7 @@ import { useEffect } from "react";
 import PatientIndexCard from "@/components/PatientIndexCard";
 import axios from "axios";
 import { User } from "firebase/auth";
-import { Input } from "antd";
+import { Input, Button } from "antd";
 
 const style: React.CSSProperties = { background: "#0092ff", padding: "8px 0" };
 
@@ -53,7 +53,7 @@ const formatPatients = (
 function PatientsListPage() {
   const user = useContext(AuthContext);
   const isOver1300px = useMediaQuery("(min-width:1300px)");
-  const rowSize = isOver1300px ? 4 : 3;
+  const rowSize = isOver1300px ? 3 : 2;
   const [patient, setPatient] = useState<patient>({
     Name: "",
     ID: 0,
@@ -63,12 +63,8 @@ function PatientsListPage() {
   const [patients, setPatients] = useState<patient[]>([]);
 
   useEffect(() => {
-    console.log("hlekrjhak");
-    console.log(user);
     if (user?.user) fetchPatients(setPatients, user?.user);
   }, [user]);
-
-  console.log(patients);
 
   function onChange<Type extends ChangeType>(e: Type) {
     const newValue = e.currentTarget.value;
@@ -79,15 +75,17 @@ function PatientsListPage() {
     }));
   }
 
-  const handleNewPatientSubmit = async (
-    e: React.FormEvent<HTMLFormElement>
-  ) => {
+  const handleNewPatientSubmit = async (e: React.SyntheticEvent) => {
     e.preventDefault();
     await axios.post("http://localhost:8080/patient", {
       name: patient.Name,
       caretakerId: user?.user?.uid,
       phoneNumber: patient.PhoneNumber,
     });
+    if (user?.user) {
+      fetchPatients(setPatients, user.user);
+      setPatient({ Name: "", ID: 0, PhoneNumber: "", CaretakerId: "" });
+    }
   };
 
   return (
@@ -98,15 +96,19 @@ function PatientsListPage() {
         flexDirection: "column",
       }}
     >
-      <h1 style={{ textAlign: "center" }}>Patients</h1>
+      <h1 style={{ marginLeft: "5em" }}>Patients</h1>
       <form
         onSubmit={handleNewPatientSubmit}
         style={{
           display: "flex",
-          border: "1px black solid",
-          padding: "2px",
+          border: "1px grey solid",
+          borderRadius: "1em",
+          padding: "20px 30px",
           maxWidth: "75vw",
-          alignSelf: "center",
+          alignSelf: "start",
+          marginLeft: "10em",
+          marginTop: "2em",
+          marginBottom: "2em",
         }}
       >
         <Input
@@ -116,6 +118,7 @@ function PatientsListPage() {
           onChange={onChange}
           name="Name"
           id="name"
+          style={{ marginRight: "3em" }}
         />
 
         <Input
@@ -125,8 +128,11 @@ function PatientsListPage() {
           name="PhoneNumber"
           id="phoneNumber"
           placeholder="Phone Number"
+          style={{ marginRight: "3em" }}
         />
-        <button type="submit">Add Patient</button>
+        <Button onClick={handleNewPatientSubmit} type="primary">
+          Add Patient
+        </Button>
       </form>
       <PatientCardContainer
         rowSize={rowSize}

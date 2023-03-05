@@ -10,7 +10,14 @@ function PatientCardContainer({
   rowSize,
 }: PatientCardContainerProps) {
   return (
-    <div>
+    <div
+      style={{
+        maxWidth: "95vw",
+        alignSelf: "start",
+        marginLeft: "10em",
+        minWidth: "70vw",
+      }}
+    >
       {patientSets[0].map((patRow, i) => (
         <PatientCardRow key={i} rowSize={rowSize} patients={patRow} />
       ))}
