@@ -20,6 +20,9 @@ import {
   MenuItem,
 } from "@mui/material";
 import { useRouter } from "next/router";
+import { AuthContext } from "@/hooks/context";
+import authClient from "@/firebase/firebase";
+import { signOut } from "firebase/auth";
 
 interface Props {
   window?: () => Window;
@@ -29,7 +32,13 @@ interface Props {
 export default function AppLayout({ window }: Props) {
   //const { window } = props;
   const router = useRouter();
-  const user = true;
+  const userCtx = React.useContext(AuthContext);
+  const user = userCtx?.user;
+  const logout = async () => {
+    signOut(authClient);
+    userCtx?.setUser(undefined);
+    router.push("/login");
+  };
 
   const [mobileOpen, setMobileOpen] = React.useState(false);
 
@@ -68,7 +77,7 @@ export default function AppLayout({ window }: Props) {
             textDecoration: "none",
           }}
         >
-          Logo
+          PillPal
         </Typography>
       </Box>
 
@@ -117,7 +126,7 @@ export default function AppLayout({ window }: Props) {
               textDecoration: "none",
             }}
           >
-            PillPall
+            PillPal
           </Typography>
 
           <Box sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}>
@@ -171,7 +180,7 @@ export default function AppLayout({ window }: Props) {
               textDecoration: "none",
             }}
           >
-            CookAssist
+            PillPal
           </Typography>
           <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
             {user && (
@@ -229,7 +238,7 @@ export default function AppLayout({ window }: Props) {
                   <MenuItem onClick={handleCloseUserMenu}>
                     <Typography
                       component="a"
-                      //onClick={logout}
+                      onClick={logout}
                       textAlign="center"
                     >
                       Logout
