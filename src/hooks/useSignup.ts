@@ -32,11 +32,14 @@ export default function useSignup() {
 
       // add display name to usser
       await updateProfile(res.user, { displayName });
-      await axios.post("http://localhost:8080/caretaker", {
-        name: displayName,
-        phoneNumber: phoneNum,
-        firebaseId: res.user.uid,
-      });
+      await axios.post(
+        `http://${process.env.NEXT_PUBLIC_BACKEND_URL}/caretaker`,
+        {
+          name: displayName,
+          phoneNumber: phoneNum,
+          firebaseId: res.user.uid,
+        }
+      );
       userContext?.setUser(res.user);
       await setPending(false);
       setError(null);

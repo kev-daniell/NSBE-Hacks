@@ -16,7 +16,7 @@ const style: React.CSSProperties = { background: "#0092ff", padding: "8px 0" };
 async function fetchPatients(cb: Function, user: User) {
   if (user) {
     const res = await axios.get(
-      `http://localhost:8080/patient/all/${user.uid}`
+      `http://${process.env.NEXT_PUBLIC_BACKEND_URL}/patient/all/${user.uid}`
     );
     cb(res.data);
   }
@@ -77,7 +77,7 @@ function PatientsListPage() {
 
   const handleNewPatientSubmit = async (e: React.SyntheticEvent) => {
     e.preventDefault();
-    await axios.post("http://localhost:8080/patient", {
+    await axios.post(`http://${process.env.NEXT_PUBLIC_BACKEND_URL}/patient`, {
       name: patient.Name,
       caretakerId: user?.user?.uid,
       phoneNumber: patient.PhoneNumber,
