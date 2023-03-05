@@ -9,6 +9,7 @@ import { useEffect } from "react";
 import PatientIndexCard from "@/components/PatientIndexCard";
 import axios from "axios";
 import { User } from "firebase/auth";
+import { Input } from "antd";
 
 const style: React.CSSProperties = { background: "#0092ff", padding: "8px 0" };
 
@@ -93,26 +94,37 @@ function PatientsListPage() {
     <div
       style={{
         paddingTop: "3em",
-        //    display: "flex", justifyContent: "center"
+        display: "flex",
+        flexDirection: "column",
       }}
     >
-      <h1>Patients</h1>
-      <form onSubmit={handleNewPatientSubmit}>
-        <label htmlFor="name">Name:</label>
-        <input
+      <h1 style={{ textAlign: "center" }}>Patients</h1>
+      <form
+        onSubmit={handleNewPatientSubmit}
+        style={{
+          display: "flex",
+          border: "1px black solid",
+          padding: "2px",
+          maxWidth: "75vw",
+          alignSelf: "center",
+        }}
+      >
+        <Input
+          placeholder="Patient Name"
           type="text"
           value={patient.Name}
           onChange={onChange}
-          name="name"
+          name="Name"
           id="name"
         />
-        <label htmlFor="phoneNumber">phone:</label>
-        <input
+
+        <Input
           type="text"
           value={patient.PhoneNumber}
           onChange={onChange}
-          name="phoneNumber"
+          name="PhoneNumber"
           id="phoneNumber"
+          placeholder="Phone Number"
         />
         <button type="submit">Add Patient</button>
       </form>
