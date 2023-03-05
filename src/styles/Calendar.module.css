@@ -1,0 +1,44 @@
+.calendar {
+    max-width: 800px;
+    margin: auto;
+    padding: 20px;
+  }
+  
+  .heading {
+    font-size: 32px;
+    margin-bottom: 20px;
+  }
+  
+  .table {
+    width: 100%;
+    border-collapse: collapse;
+    border: 1px solid #ccc;
+    margin-bottom: 20px;
+  }
+  
+  .table th,
+  .table td {
+    padding: 10px;
+    border: 1px solid #ccc;
+  }
+  
+  .table th {
+    background-color: #f5f5f5;
+    text-align: left;
+  }
+  
+  .date {
+    font-weight: bold;
+  }
+  
+  .medicine {
+    font-weight: bold;
+  }
+  
+  .dosage,
+  .time {
+    margin-top: 5px;
+    font-size: 0.8em;
+    color: rgb(152, 20, 20);
+  }
+  
