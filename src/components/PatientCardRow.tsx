@@ -12,9 +12,10 @@ function PatientCardRow({ patients, rowSize }: Props) {
   for (let i = 0; i < rowSize - patients.length; i++) {
     fillerCol.push(
       <Col
-      // xs={{ span: 1, offset: 1 }}
-      // sm={{ span: 1, offset: 1 }}
-      // xl={{ span: 2, offset: 0 }}
+        key={i}
+        // xs={{ span: 1, offset: 1 }}
+        // sm={{ span: 1, offset: 1 }}
+        // xl={{ span: 2, offset: 0 }}
       ></Col>
     );
   }
@@ -23,6 +24,7 @@ function PatientCardRow({ patients, rowSize }: Props) {
     <Row justify="center">
       {patients.map((p) => (
         <Col
+          key={p.id}
           span={4}
           //   xs={{ span: 1, offset: 1 }}
           //   sm={{ span: 1, offset: 1 }}

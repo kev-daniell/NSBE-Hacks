@@ -11,8 +11,8 @@ function PatientCardContainer({
 }: PatientCardContainerProps) {
   return (
     <div>
-      {patientSets[0].map((patRow) => (
-        <PatientCardRow rowSize={rowSize} patients={patRow} />
+      {patientSets[0].map((patRow, i) => (
+        <PatientCardRow key={i} rowSize={rowSize} patients={patRow} />
       ))}
       {patientSets[1] && (
         <PatientCardRow rowSize={rowSize} patients={patientSets[1]} />
