@@ -21,7 +21,8 @@ func main() {
 		err error
 		db  *gorm.DB
 	)
-	port := os.Getenv("PORT")
+	// port := os.Getenv("PORT")
+	port := "8080"
 	host := os.Getenv("HOST")
 	dbPort, err := strconv.Atoi(os.Getenv("DBPORT"))
 	if err != nil {
