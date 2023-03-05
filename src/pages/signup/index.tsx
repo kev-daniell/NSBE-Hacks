@@ -28,7 +28,7 @@ function SignUpForm() {
 
   const onSubmit = async (e: React.SyntheticEvent) => {
     e.preventDefault();
-    signup(details.email, details.password, details.name);
+    signup(details.email, details.password, details.name, details.phoneNumber);
   };
   function onChange(e: React.ChangeEvent<HTMLInputElement>) {
     setDetails((prevState) => {

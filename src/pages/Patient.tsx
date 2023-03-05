@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { PatientType} from "../types/types";
+import { PatientType } from "../types/types";
 
 const Patient = () => {
   const [newPatientName, setNewPatientName] = useState("");
@@ -13,7 +13,7 @@ const Patient = () => {
     const newPatient: PatientType = {
       name: newPatientName,
       calendar: JSON.parse(newPatientDosages),
-      medicineType: newPatientMedicineType
+      medicineType: newPatientMedicineType,
     };
 
     setPatients((prevPatients) => [...prevPatients, newPatient]);
@@ -66,4 +66,3 @@ const Patient = () => {
 };
 
 export default Patient;
-

@@ -1,6 +1,9 @@
 import { patient } from "@/types/Patient";
 import PatientCardContainer from "@/components/PatientCardContainer";
 import { useMediaQuery } from "@mui/material";
+import { useState } from "react";
+import { ChangeType } from "@/types/formOnchange";
+
 const style: React.CSSProperties = { background: "#0092ff", padding: "8px 0" };
 
 const seed: patient[] = [
@@ -139,6 +142,26 @@ const formatPatients = (
 function PatientsListPage() {
   const isOver1300px = useMediaQuery("(min-width:1300px)");
   const rowSize = isOver1300px ? 4 : 3;
+  const [patient, setPatient] = useState<patient>({
+    name: "",
+    id: "",
+    phoneNumber: "",
+    caretakerId: "",
+  });
+
+  function onChange<Type extends ChangeType>(e: Type) {
+    const newValue = e.currentTarget.value;
+    const attributeName = e.currentTarget.name;
+    setPatient((prevEve) => ({
+      ...prevEve,
+      [attributeName]: newValue,
+    }));
+  }
+
+  const handleNewPatientSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+  };
+
   return (
     <div
       style={{
@@ -146,6 +169,42 @@ function PatientsListPage() {
         //    display: "flex", justifyContent: "center"
       }}
     >
+      <h1>Patients</h1>
+      <form onSubmit={handleNewPatientSubmit}>
+        <label htmlFor="name">Name:</label>
+        <input
+          type="text"
+          value={patient.name}
+          onChange={onChange}
+          name="name"
+          id="name"
+        />
+        <label htmlFor="phoneNumber">phone:</label>
+        <input
+          type="text"
+          value={patient.phoneNumber}
+          onChange={onChange}
+          name="phoneNumber"
+          id="phoneNumber"
+        />
+        {/* <label>
+          Dosages:
+          <input
+            type="text"
+            value={newPatientDosages}
+            onChange={(e) => setNewPatientDosages(e.target.value)}
+          />
+        </label> */}
+        {/* <label>
+          Medicine Type:
+          <input
+            type="text"
+            value={newPatientMedicineType}
+            onChange={(e) => setNewPatientMedicineType(e.target.value)}
+          />
+        </label> */}
+        <button type="submit">Add Patient</button>
+      </form>
       <PatientCardContainer
         rowSize={rowSize}
         patientSets={formatPatients(seed, rowSize)}
