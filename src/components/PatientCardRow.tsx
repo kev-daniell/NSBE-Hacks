@@ -21,11 +21,11 @@ function PatientCardRow({ patients, rowSize }: Props) {
   }
   const isOver700px = true;
   return (
-    <Row justify="center">
+    <Row justify="space-evenly" style={{ marginBottom: "2em" }}>
       {patients.map((p) => (
         <Col
           key={p.ID}
-          span={4}
+          span={8}
           //   xs={{ span: 1, offset: 1 }}
           //   sm={{ span: 1, offset: 1 }}
           //   xl={{ span: 2, offset: 0 }}

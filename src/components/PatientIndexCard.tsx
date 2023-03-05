@@ -13,11 +13,19 @@ function PatientIndexCard({ patient }: Props) {
       <Card
         size="small"
         title={Name}
-        extra={<a href={`/patients/${ID}`}>More</a>}
-        headStyle={{ color: "#e6e9ec" }}
+        extra={
+          <a
+            style={{ color: "#EEF1F4" }}
+            className="card-link"
+            href={`/patients/${ID}`}
+          >
+            More
+          </a>
+        }
+        headStyle={{ background: "#070707", color: "#e6e9ec" }}
         style={{
-          width: 200, //make dynamic for responsiveness
-          backgroundColor: bgColor,
+          width: 275, //make dynamic for responsiveness
+          background: "#070707",
           color: "#b3bcc6",
         }}
       >
