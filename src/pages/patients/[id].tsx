@@ -84,8 +84,8 @@ const CalendarPage: React.FC<Props> = () => {
   }, []);
 
   return (
-    <div style={{ padding: '20px' }}>
-      <h1 style={{ textAlign: 'center' }}>Calendar Page</h1>
+    <div style={{ background: '#f5f5f5', padding: '20px' }}>
+      <h1 style={{ textAlign: 'center', color: '#1890ff' }}>Calendar Page</h1>
       <AntdCalendar
         dateCellRender={(date) => {
             const day = calendar.weeks.find((week) =>
@@ -103,7 +103,7 @@ const CalendarPage: React.FC<Props> = () => {
             return (
               <ul>
                 {dosage && (
-                  <li>
+                  <li style={{ color: '#1890ff' }}>
                     {dosage.medicine}: {dosage.dosage}, {dosage.time},{' '}
                     {dosage.medicineType}
                   </li>
@@ -111,8 +111,6 @@ const CalendarPage: React.FC<Props> = () => {
               </ul>
             );
           }}
-          
-          
       />
     </div>
   );

@@ -1,4 +1,6 @@
 import Head from "next/head";
+import { Button } from "antd";
+import Link from "next/link";
 
 export default function Home() {
   return (
@@ -9,15 +11,28 @@ export default function Home() {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
       </Head>
       <main
-      style={{
-        display: "flex",
-        flexDirection: "column",
-        alignItems: "center",
-        textAlign:"center",
-        fontSize: "3em"
-      }}
-      >What is PillPall?
-        {/* <div style={{ width: "80vw", height: "30em", background: "red" }}></div> */}
+        style={{
+          display: "flex",
+          flexDirection: "column",
+          alignItems: "center",
+          justifyContent: "center",
+          textAlign: "center",
+          height: "100vh",
+          backgroundImage: "linear-gradient(to bottom, #f9f7f7, #ccd2e7)",
+          color: "#1f1f1f",
+          fontWeight: "bold",
+          fontSize: "3em",
+        }}
+      >
+        <div>
+          <p style={{ marginBottom: "0.5em" }}>Welcome to PillPal!</p>
+          <p style={{ marginBottom: "2em" }}>
+            A simple tool to keep track of your medication.
+          </p>
+          <Link href="/patients">
+            <Button size="large">View Patients</Button>
+          </Link>
+        </div>
       </main>
     </>
   );
