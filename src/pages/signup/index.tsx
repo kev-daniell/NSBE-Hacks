@@ -1,30 +1,28 @@
 import { Container, Typography, TextField, Button } from "@mui/material";
-import { useForm } from "react-hook-form";
 import { useState } from "react";
 import * as React from "react";
+import useSignup from "@/hooks/useSignup";
 
 interface IFormInput {
-  firstName: string;
-  lastName: string;
+  name: string;
   email: string;
   password: string;
   phoneNumber: string;
 }
 
 function SignUpForm() {
-  const { register, handleSubmit } = useForm<IFormInput>();
+  const { error, pending, signup } = useSignup();
 
-  const [json, setJson] = useState<string>();
   const [details, setDetails] = useState<IFormInput>({
-    firstName: "",
-    lastName: "",
+    name: "",
     email: "",
     phoneNumber: "",
     password: "",
   });
 
-  const onSubmit = (data: IFormInput) => {
-    setJson(JSON.stringify(data));
+  const onSubmit = async (e: React.SyntheticEvent) => {
+    e.preventDefault();
+    signup(details.email, details.password, details.name);
   };
   function onChange(e: React.ChangeEvent<HTMLInputElement>) {
     setDetails((prevState) => {
@@ -42,27 +40,19 @@ function SignUpForm() {
       >
         SignUp
       </Typography>
-      <form onSubmit={handleSubmit(onSubmit)} noValidate>
+      <form onSubmit={onSubmit} noValidate>
         <TextField
-          {...register("firstName")}
+          name="name"
           variant="outlined"
           margin="normal"
-          label="First Name"
+          label="Name"
           fullWidth
           required
           onChange={onChange}
         />
+
         <TextField
-          {...register("lastName")}
-          variant="outlined"
-          margin="normal"
-          label="Last Name"
-          fullWidth
-          required
-          onChange={onChange}
-        />
-        <TextField
-          {...register("email")}
+          name="email"
           variant="outlined"
           margin="normal"
           label="Email"
@@ -71,7 +61,7 @@ function SignUpForm() {
           onChange={onChange}
         />
         <TextField
-          {...register("phoneNumber")}
+          name="phoneNumber"
           variant="outlined"
           margin="normal"
           label="Phone"
@@ -81,7 +71,7 @@ function SignUpForm() {
           onChange={onChange}
         />
         <TextField
-          {...register("password")}
+          name="password"
           variant="outlined"
           margin="normal"
           label="Password"

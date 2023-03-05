@@ -21,4 +21,4 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const authClient = getAuth();
 
-export { authClient };
+export default authClient;

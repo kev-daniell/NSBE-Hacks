@@ -2,6 +2,7 @@ import { Container, Typography, TextField, Button } from "@mui/material";
 import { useForm } from "react-hook-form";
 import { useState } from "react";
 import * as React from "react";
+import useLogin from "@/hooks/useLogin";
 
 interface IFormInput {
   email: string;
@@ -9,16 +10,16 @@ interface IFormInput {
 }
 
 function LoginForm() {
-  const { register, handleSubmit } = useForm<IFormInput>();
+  const { error, pending, login } = useLogin();
 
-  const [json, setJson] = useState<string>();
   const [details, setDetails] = useState<IFormInput>({
     email: "",
     password: "",
   });
 
-  const onSubmit = (data: IFormInput) => {
-    setJson(JSON.stringify(data));
+  const onSubmit = async (e: React.SyntheticEvent) => {
+    e.preventDefault();
+    login(details.email, details.password);
   };
   function onChange(e: React.ChangeEvent<HTMLInputElement>) {
     setDetails((prevState) => {
@@ -36,9 +37,9 @@ function LoginForm() {
       >
         Login
       </Typography>
-      <form onSubmit={handleSubmit(onSubmit)} noValidate>
+      <form onSubmit={onSubmit} noValidate>
         <TextField
-          {...register("email")}
+          name="email"
           variant="outlined"
           margin="normal"
           label="Email"
@@ -48,7 +49,7 @@ function LoginForm() {
         />
 
         <TextField
-          {...register("password")}
+          name="password"
           variant="outlined"
           margin="normal"
           label="Password"
@@ -66,15 +67,6 @@ function LoginForm() {
         >
           Login
         </Button>
-        {/* {json && (
-          <>
-            <Typography variant="body1">
-              Below is the JSON that would normally get passed to the server
-              when a form gets submitted
-            </Typography>
-            <Typography variant="body2">{json}</Typography>
-          </>
-        )} */}
       </form>
     </Container>
   );
